@@ -4,7 +4,7 @@ import { IHomeState } from '../../actions/Home/model'
 import { HomeActions } from '../../actions/Home/action'
 import { IApplicationState } from "../../store/state";
 
-import './LandingPage.css'
+// import './LandingPage.scss'
 type IProps = IHomeState & typeof HomeActions;
 
 interface IState {
