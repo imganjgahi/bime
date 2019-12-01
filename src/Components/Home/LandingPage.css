@@ -1,0 +1,8 @@
+.headerTitle {
+    text-align: center;
+    width: max-content;
+    margin: 15px auto;
+}
+.headerTitle p {
+    font-size: 12px;
+}

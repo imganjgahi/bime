@@ -1,6 +1,27 @@
+@font-face {
+  font-family: "Shabnam";
+  src: url("./assets/fonts/Shabnam-FD.eot");
+  src: url("./assets/fonts/Shabnam-FD.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/Shabnam-FD.woff") format("woff"), url("./assets/fonts/Shabnam-FD.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Shabnam";
+  src: url("./assets/fonts/Shabnam-Bold-FD.eot");
+  src: url("./assets/fonts/Shabnam-Bold-FD.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/Shabnam-Bold-FD.woff") format("woff"), url("./assets/fonts/Shabnam-Bold-FD.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Shabnam";
+  src: url("./assets/fonts/Shabnam-Light-FD.eot");
+  src: url("./assets/fonts/Shabnam-Light-FD.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/Shabnam-Light-FD.woff") format("woff"), url("./assets/fonts/Shabnam-Light-FD.ttf") format("truetype");
+  font-weight: 300;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: Shabnam, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -9,7 +30,10 @@ body {
   direction: rtl;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container {
+  padding: 10px 10px;
+  background-color: #00abff;
+  height: 350px;
+  display: flex;
+  align-items: center;
 }

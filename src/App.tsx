@@ -11,13 +11,15 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <NavBar />
-      
+      <div className="container">
+
     <Router>
     <Switch>
 
       <Route path = "/" component = {LandingPage} />
     </Switch>
     </Router>
+    </div>
     </div>
   );
 }
