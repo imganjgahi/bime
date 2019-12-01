@@ -1,6 +1,10 @@
 import React from 'react'
+import { connect } from "react-redux";
+import {IHomeState} from '../../actions/Home/model'
+import {HomeActions} from '../../actions/Home/action'
+import { IApplicationState } from "../../store/state";
 
-type IProps = {}
+type IProps = IHomeState & typeof HomeActions;
 
 interface IState {
     status : boolean
@@ -8,7 +12,7 @@ interface IState {
 
 class LandingPage extends React.Component<IProps, IState> {
 
-    constructor(props: IProps) {
+    constructor(props: any) {
         super(props);
         this.state = {
             status: false
@@ -17,9 +21,16 @@ class LandingPage extends React.Component<IProps, IState> {
 
     render() {
         return (
-            <p> Home </p>
+            <div>
+                <p> {this.props.test.num} </p>
+                <button onClick={()=> this.props.testAction()} >Go</button>
+            </div>
         )
     }
 }
 
-export default LandingPage;
+// export default LandingPage;
+export default connect(
+    (state: IApplicationState) => state.home,
+    HomeActions,
+)(LandingPage);
