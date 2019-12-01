@@ -8,10 +8,10 @@ export const HomeActions = {
         try {
             const res = await HomeApi.testApi()
             console.log(res.status, " / ", res.data) 
+            dispatch({ type: HomeActionTypes.TestAction  });
         } catch (error) {
-            console.log(error)
+            console.log("Massege: ", error.message)
         }
-        dispatch({ type: HomeActionTypes.TestAction  });
 
     },
 };
