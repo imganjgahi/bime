@@ -1,7 +1,6 @@
 import React from 'react'
 
 interface IProps {
-    noHeader?: boolean
     title?: string
     type?: string
     onOk?: () => void
@@ -50,9 +49,9 @@ class Modal extends React.Component<IProps, IState> {
 
                 </div>
                 <div className={modalClassName}>
-                    {!this.props.noHeader && (
+                    {this.props.title && (
                         <div className="modalHeader">
-                            {this.props.title ? this.props.title : "پیغام"}
+                            {this.props.title}
                         </div>
                     )}
                     <div className="modalBody">

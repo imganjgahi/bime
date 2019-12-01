@@ -32,7 +32,7 @@ class Landingpanel extends React.Component<IProps, IState> {
                 // type= "warning"
                 onCancel = {() => this.motorModalHandler(false)}
                 onOk = {() => this.onOk()}
-                title="بیمه موتور سیکلت"
+                // title="بیمه موتور سیکلت"
                 visiblity={this.state.motorModal}>
                     <p>
                         بیمه بدنه موتور سیکلت
