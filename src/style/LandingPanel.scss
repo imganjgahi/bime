@@ -1,0 +1,32 @@
+.landingPanel {
+	margin-top: 20px;
+	display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.panelIcon {
+	width: 60px;
+}
+.panel {
+	width: 100px;
+	height: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: white;
+	padding: 5px;
+	border-radius: 5px;
+    border: 1px solid #aaa;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 200ms;
+
+    &:hover {
+        border: 1px solid black;
+        box-shadow: -2px 2px 3px  #ccc;
+        color: green;          
+        border-radius: 15px;
+
+    }
+}

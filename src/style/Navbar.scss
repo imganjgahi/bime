@@ -5,15 +5,15 @@
     align-items: center;
     background-color:#444;
     color: white;
+    .navMenu {
+        display: flex;
+        justify-content: space-around;
+        width: 60%;
+        list-style: none;
+        padding: 0;
+    }
+    .navLink {
+        cursor: pointer;
+    }
 }
 
-.navMenu {
-    display: flex;
-    justify-content: space-around;
-    width: 60%;
-    list-style: none;
-    padding: 0;
-}
-.navLink {
-    cursor: pointer;
-}

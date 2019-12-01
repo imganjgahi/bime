@@ -29,14 +29,7 @@
     text-align: right;
     direction: rtl;
   }
-  
-  .container {
-    padding: 10px 10px;
-    background-color: #00abff;
-    height: 350px;
-    display: flex;
-    align-items: center;
-  }
 
-  @import './LandingPage.scss';
   @import './Navbar.scss';
+  @import './LandingPage.scss';
+  @import './LandingPanel.scss';

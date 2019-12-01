@@ -4,15 +4,10 @@ const NavBar = (props: any) => {
     return (
         <div className="navbar">
             <div className="logo">
-                Logo
+                لوگو
             </div>
                 <ul className="navMenu">
-                    <li className="navLink">Link</li>
-                    <li className="navLink">Link</li>
-                    <li className="navLink">Link</li>
-                    <li className="navLink">Link</li>
-                    <li className="navLink">Link</li>
-                    <li className="navLink">Link</li>
+                    <li className="navLink">منو</li>
                 </ul>
         </div>
     )
