@@ -45,7 +45,7 @@ class Login extends Component<IProps, IState> {
                     
                     <FormFooter>
                         <Button type="submit"> تایید </Button>
-                        <Button className="danger" type="button" onClick={this.onCancelHandler}> بستن </Button>
+                        <Button className="danger" onClick={this.onCancelHandler}> بستن </Button>
                     </FormFooter>
                 </Form>
             </ModalForm>

@@ -112,9 +112,9 @@ export default class Form extends React.Component<IProps, IState>{
                     itemElement={El}
                     err={this.state.err && this.state.err[child.props.name] ? this.state.err[child.props.name].msg : null} />
             }
-            else if (child && child.type === FormFooter) {
+            // else if (child && child.type === FormFooter) {
                 return child
-            }
+            // }
         });
         return items;
     }
