@@ -24,14 +24,14 @@ export default class Form extends React.Component<IProps, IState>{
                 if (!isValid) {
                     msg = rule.msg;
                 }
-                    err[name]= { msg, isValid }
+                err[name] = { msg, isValid }
             }
             if (rule.max && isValid) {
                 isValid = value.length <= rule.max
                 if (!isValid) {
                     msg = rule.msg
                 }
-                err[name]= { msg, isValid }
+                err[name] = { msg, isValid }
             }
         });
         this.setState({ err })
@@ -43,12 +43,12 @@ export default class Form extends React.Component<IProps, IState>{
         // this.setState({elements})
         this.setStateValues();
     }
-    componentDidUpdate(pervProps: any, pervState: any){
-        if(pervProps !== this.props){
+    componentDidUpdate(pervProps: any, pervState: any) {
+        if (pervProps !== this.props) {
             this.setStateValues();
         }
-        if(!pervProps.reset && this.props.reset){
-            this.setState({data: {}})
+        if (!pervProps.reset && this.props.reset) {
+            this.setState({ data: {} })
         }
     }
 
@@ -58,8 +58,8 @@ export default class Form extends React.Component<IProps, IState>{
             value = e.target.value
         }
 
-        this.setState({data:{...this.state.data,  [name]: value} })
-        if(rules){
+        this.setState({ data: { ...this.state.data, [name]: value } })
+        if (rules) {
             this.itemValidation(name, value, rules);
         }
     }
@@ -71,10 +71,10 @@ export default class Form extends React.Component<IProps, IState>{
 
         React.Children.map(this.props.children, (child: any, index) => {
             if (child && child.type === FormItem) {
-                data[child.props.name] = child.props.initialValue ? child.props.initialValue :  ""
-                err[child.props.name]= {msg: "", isValid: false}
-                if(child.props.rules){
-                    rules[child.props.name]= child.props.rules
+                data[child.props.name] = child.props.initialValue ? child.props.initialValue : ""
+                err[child.props.name] = { msg: "", isValid: false }
+                if (child.props.rules) {
+                    rules[child.props.name] = child.props.rules
                 }
             }
         });
@@ -94,48 +94,48 @@ export default class Form extends React.Component<IProps, IState>{
                     className: comp.props.className,
                     initialValue: child.props.initialValue ? child.props.initialValue : "",
                     onChange: (e: any) => {
-                        if(comp.props.onChange){
+                        if (comp.props.onChange) {
                             comp.props.onChange(e)
                         }
                         this.childChangeHandler(child.props.name, e, child.props.rules)
                     },
                     value: this.state.data && this.state.data[child.props.name] ? this.state.data[child.props.name] : ""
                 }
-                if(initialElement.initialValue === ""){
+                if (initialElement.initialValue === "") {
                     delete initialElement.initialValue
                 }
-                const El = React.cloneElement(comp, initialElement , null);
+                const El = React.cloneElement(comp, initialElement, null);
                 return <FromItemWrapper
                     label={child.props.label}
-                    id = {comp.props.id ? comp.props.id : child.props.name}
+                    id={comp.props.id ? comp.props.id : child.props.name}
                     name={child.props.name}
                     itemElement={El}
                     err={this.state.err && this.state.err[child.props.name] ? this.state.err[child.props.name].msg : null} />
             }
-            // else if (child && child.type === FormFooter) {
+            else if (child && child.type === "button") {
                 return child
-            // }
+            }
         });
         return items;
     }
 
     onFormSubmit = (event: any) => {
         event.preventDefault();
-        const {data, rules} = this.state
+        const { data, rules } = this.state
         let err: any = {}
         let isValid = true;
-        for(const item in rules){
+        for (const item in rules) {
             let localValidation = false;
-            if(isValid) {
+            if (isValid) {
                 isValid = this.itemValidation(item, this.state.data[item], this.state.rules[item])
             }
             localValidation = this.itemValidation(item, this.state.data[item], this.state.rules[item])
-            if(!localValidation) {
+            if (!localValidation) {
                 err[item] = this.state.err[item]
-            } 
-            
+            }
+
         }
-        if(isValid){
+        if (isValid) {
             err = null
         }
         this.props.onSubmit(data, err);
@@ -143,9 +143,13 @@ export default class Form extends React.Component<IProps, IState>{
 
     render() {
         const elements = this.getChild();
-        return <form onSubmit={this.onFormSubmit}>
-            {elements}
-        </form>;
+        return (
+            <form onSubmit={this.onFormSubmit}>
+                {elements}
+
+                <button id="formBtnSubmit" style={{ display: "none" }} />
+            </form>
+        )
     }
 }
 
@@ -159,10 +163,4 @@ const FromItemWrapper = (props: any) => {
     )
 }
 
-export class FormItem extends React.Component<any, any>{}
-export class FormFooter extends React.Component<any, any>{
-
-    render(){
-        return <div className="formFooter"> {this.props.children} </div>
-    }
-}
+export class FormItem extends React.Component<any, any>{ }

@@ -28,9 +28,9 @@ class RotateCarousel extends React.Component<IProps, IState> {
             <div>
                 <div className="icon-cards">
                 <div className="content" style={{ transform: `translateZ(-35vw) rotateY(${this.state.newDeg}deg)` }}>
-                    <div className="item"><span className="h1">🙂</span></div>
-                    <div className="item"><span className="h1">😊</span></div>
-                    <div className="item"><span className="h1">😀</span></div>
+                    <div className="item"><span className="h1">h1</span></div>
+                    <div className="item"><span className="h1">h2</span></div>
+                    <div className="item"><span className="h1">h3</span></div>
                 </div>
             </div>
             <Button onClick={() => this.classToggle(120)}> {"<-"} </Button>

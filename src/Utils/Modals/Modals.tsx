@@ -44,10 +44,10 @@ class Modal extends React.Component<IProps, IState> {
 
         return (
             <div className="modalContainer">
-                
+
                 <div className="modalBg" onClick={() => {
-                this.closeHandler()
-            }}></div>
+                    this.closeHandler()
+                }}></div>
 
                 <div className={modalClassName}>
                     {this.props.title && (
@@ -61,12 +61,16 @@ class Modal extends React.Component<IProps, IState> {
                     <div className="modalFooter">
 
                         {this.props.onOk && (
-                        <Button onClick={() => {
-                            if (this.props.onOk) {
-                                this.props.onOk()
-                            }
-                        }}>
-                            تایید
+                            <Button onClick={() => {
+                                if (this.props.onOk) {
+                                    const btn = document.getElementById("formBtnSubmit")
+                                    if (btn) {
+                                        btn.click();
+                                    }
+                                    this.props.onOk()
+                                }
+                            }}>
+                                تایید
                         </Button>
                         )}
                         <Button className="cancel" onClick={() => this.closeHandler()}> بستن </Button>
