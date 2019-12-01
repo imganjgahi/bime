@@ -2,6 +2,7 @@ import React from 'react';
 interface IProps {
     onSubmit: (values: any, err: any) => void;
     reset?: boolean;
+    id?: string;
 }
 interface IState {
     [key: string]: any;
@@ -144,7 +145,7 @@ export default class Form extends React.Component<IProps, IState>{
     render() {
         const elements = this.getChild();
         return (
-            <form onSubmit={this.onFormSubmit}>
+            <form id={this.props.id} onSubmit={this.onFormSubmit}>
                 {elements}
 
                 <button id="formBtnSubmit" style={{ display: "none" }} />
