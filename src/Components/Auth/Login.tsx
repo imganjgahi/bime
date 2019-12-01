@@ -36,7 +36,11 @@ class Login extends Component<IProps, IState> {
                     console.log("onSub: ", values, err)
 
                 }}>
-                    <FormItem rules={[{ required: true, msg: "Name is require" }]} label="User Name" name="Name" component={<input className="txtInput" type="text" />} />
+                    <FormItem 
+                    rules={[{ required: true, msg: "Name is require" }]} 
+                    initialValue = "Mehran"
+                    label="User Name" name="Name" 
+                    component={<input className="txtInput" type="text" />} />
                     
                     <FormFooter>
                     <button className="confirmBtn" type="submit"> تایید </button>

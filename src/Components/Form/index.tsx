@@ -92,7 +92,7 @@ export default class Form extends React.Component<IProps, IState>{
                     id: comp.props.id ? comp.props.id : child.props.name,
                     name: child.props.name,
                     className: comp.props.className,
-                    initialValue: child.props.initialValue ? child.props.initialValue : "",
+                    // initialValue: child.props.initialValue ? child.props.initialValue : "",
                     onChange: (e: any) => {
                         if(comp.props.onChange){
                             comp.props.onChange(e)
