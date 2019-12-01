@@ -1,0 +1,19 @@
+.navbar {
+    display: flex;
+    padding: 15px 25px;
+    height: 20px;
+    align-items: center;
+    background-color:#00abff;
+    color: white;
+}
+
+.navMenu {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    list-style: none;
+    padding: 0;
+}
+.navLink {
+    cursor: pointer;
+}
