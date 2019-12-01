@@ -18,7 +18,6 @@ const App: React.FC = () => {
       <Route path = "/" component = {LandingPage} />
     </Switch>
     </Router>
-      {/* <LandingPage /> */}
     </div>
   );
 }

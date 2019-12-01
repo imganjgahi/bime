@@ -29,7 +29,6 @@ class LandingPage extends React.Component<IProps, IState> {
     }
 }
 
-// export default LandingPage;
 export default connect(
     (state: IApplicationState) => state.home,
     HomeActions,
