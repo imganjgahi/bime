@@ -11,7 +11,7 @@ interface IProps {
 interface IState {
     isActive: boolean;
 }
-class Modal extends React.Component<IProps, IState> {
+class ModalForm extends React.Component<IProps, IState> {
 
     constructor(props: IProps) {
         super(props)
@@ -57,18 +57,6 @@ class Modal extends React.Component<IProps, IState> {
                     <div className="modalBody">
                         {this.props.children}
                     </div>
-                    <div className="modalFooter">
-                        {this.props.onOk && <button onClick={() => {
-                            if (this.props.onOk) {
-                                this.props.onOk()
-                            }
-                        }}>
-                            تایید
-                    </button>}
-                        <button onClick={() => this.closeHandler()}>
-                            بستن
-                </button>
-                    </div>
                 </div>
             </div>
         )
@@ -76,4 +64,4 @@ class Modal extends React.Component<IProps, IState> {
 
 }
 
-export default Modal
+export default ModalForm

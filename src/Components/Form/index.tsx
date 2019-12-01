@@ -1,5 +1,4 @@
 import React from 'react';
-import './Form.css';
 interface IProps {
     onSubmit: (values: any, err: any) => void;
     reset?: boolean;
@@ -92,6 +91,7 @@ export default class Form extends React.Component<IProps, IState>{
                 const El = React.cloneElement(comp, {
                     id: comp.props.id ? comp.props.id : child.props.name,
                     name: child.props.name,
+                    className: comp.props.className,
                     initialValue: child.props.initialValue ? child.props.initialValue : "",
                     onChange: (e: any) => {
                         if(comp.props.onChange){
@@ -108,7 +108,7 @@ export default class Form extends React.Component<IProps, IState>{
                     itemElement={El}
                     err={this.state.err && this.state.err[child.props.name] ? this.state.err[child.props.name].msg : null} />
             }
-            else if (child && child.type === "button") {
+            else if (child && child.type === FormFooter) {
                 return child
             }
         });
@@ -147,7 +147,7 @@ export default class Form extends React.Component<IProps, IState>{
 
 const FromItemWrapper = (props: any) => {
     return (
-        <div>
+        <div className="itemWrapper">
             {props.label && <label className="fildesLabel" htmlFor={props.id}>{props.label}</label>}
             {props.itemElement}
             {props.err && <small className="validationError"> {props.err} </small>}
@@ -156,3 +156,9 @@ const FromItemWrapper = (props: any) => {
 }
 
 export class FormItem extends React.Component<any, any>{}
+export class FormFooter extends React.Component<any, any>{
+
+    render(){
+        return <div className="formFooter"> {this.props.children} </div>
+    }
+}
