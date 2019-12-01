@@ -22,17 +22,21 @@ class Landingpanel extends React.Component<IProps, IState> {
     motorModalHandler = (status: boolean) => {
         this.setState({motorModal: status})
     }
+    onOk = () => {
+        console.log("Ok")
+    }
     render() {
         return (
             <React.Fragment>
                 <Modal 
                 // type= "warning"
                 onCancel = {() => this.motorModalHandler(false)}
+                onOk = {() => this.onOk()}
                 title="بیمه موتور سیکلت"
                 visiblity={this.state.motorModal}>
-                    <h1>
+                    <p>
                         بیمه بدنه موتور سیکلت
-                    </h1>
+                    </p>
                 </Modal>
                 <div className="landingPanel">
                 <div className="panel" onClick={() => this.motorModalHandler(true)}>
