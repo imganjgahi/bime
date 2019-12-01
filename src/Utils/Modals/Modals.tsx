@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../Buttons/Buttons';
 
 interface IProps {
     title?: string
@@ -58,16 +59,17 @@ class Modal extends React.Component<IProps, IState> {
                         {this.props.children}
                     </div>
                     <div className="modalFooter">
-                        {this.props.onOk && <button onClick={() => {
+
+                        {this.props.onOk && (
+                        <Button onClick={() => {
                             if (this.props.onOk) {
                                 this.props.onOk()
                             }
                         }}>
                             تایید
-                    </button>}
-                        <button onClick={() => this.closeHandler()}>
-                            بستن
-                </button>
+                        </Button>
+                        )}
+                        <Button className="cancel" onClick={() => this.closeHandler()}> بستن </Button>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import { AuthActions } from '../../actions/Auth/action';
 import { IApplicationState } from '../../store/state';
 import { connect } from 'react-redux';
 import Form, { FormItem, FormFooter } from '../Form';
+import Button from '../../Utils/Buttons/Buttons';
 
 
 type IProps = IAuthState & typeof AuthActions;
@@ -43,8 +44,8 @@ class Login extends Component<IProps, IState> {
                     component={<input className="txtInput" type="text" />} />
                     
                     <FormFooter>
-                    <button className="confirmBtn" type="submit"> تایید </button>
-                    <button className="cancelBtn" type="button" onClick={this.onCancelHandler}> بستن </button>
+                        <Button type="submit"> تایید </Button>
+                        <Button className="danger" type="button" onClick={this.onCancelHandler}> بستن </Button>
                     </FormFooter>
                 </Form>
             </ModalForm>
