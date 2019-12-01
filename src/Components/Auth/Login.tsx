@@ -5,7 +5,7 @@ import { AuthActions } from '../../actions/Auth/action';
 import { IApplicationState } from '../../store/state';
 import { connect } from 'react-redux';
 import Form, { FormItem, FormFooter } from '../Form';
-import Button from '../../Utils/Buttons/Buttons';
+import Button from '../../Utils/Buttons/Button';
 
 
 type IProps = IAuthState & typeof AuthActions;

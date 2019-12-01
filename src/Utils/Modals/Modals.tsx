@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../Buttons/Buttons';
+import Button from '../Buttons/Button';
 
 interface IProps {
     title?: string
