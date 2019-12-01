@@ -88,11 +88,11 @@ export default class Form extends React.Component<IProps, IState>{
         var items = React.Children.map(this.props.children, (child: any, index: number) => {
             if (child && child.type === FormItem) {
                 var comp = child.props.component;
-                const El = React.cloneElement(comp, {
+                const initialElement = {
                     id: comp.props.id ? comp.props.id : child.props.name,
                     name: child.props.name,
                     className: comp.props.className,
-                    // initialValue: child.props.initialValue ? child.props.initialValue : "",
+                    initialValue: child.props.initialValue ? child.props.initialValue : "",
                     onChange: (e: any) => {
                         if(comp.props.onChange){
                             comp.props.onChange(e)
@@ -100,7 +100,11 @@ export default class Form extends React.Component<IProps, IState>{
                         this.childChangeHandler(child.props.name, e, child.props.rules)
                     },
                     value: this.state.data && this.state.data[child.props.name] ? this.state.data[child.props.name] : ""
-                }, null);
+                }
+                if(initialElement.initialValue === ""){
+                    delete initialElement.initialValue
+                }
+                const El = React.cloneElement(comp, initialElement , null);
                 return <FromItemWrapper
                     label={child.props.label}
                     id = {comp.props.id ? comp.props.id : child.props.name}

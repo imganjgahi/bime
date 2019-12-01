@@ -38,7 +38,7 @@ class Login extends Component<IProps, IState> {
                 }}>
                     <FormItem 
                     rules={[{ required: true, msg: "Name is require" }]} 
-                    initialValue = "Mehran"
+                    // initialValue = "Mehran"
                     label="User Name" name="Name" 
                     component={<input className="txtInput" type="text" />} />
                     
