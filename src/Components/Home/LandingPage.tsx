@@ -4,6 +4,7 @@ import { IHomeState } from '../../actions/Home/model'
 import { HomeActions } from '../../actions/Home/action'
 import { IApplicationState } from "../../store/state"
 import Landingpanel from './Landingpanel';
+import RotateCarousel from '../Carousels/RotateCarousel';
 // import './LandingPage.scss'
 type IProps = IHomeState & typeof HomeActions;
 
@@ -34,6 +35,7 @@ class LandingPage extends React.Component<IProps, IState> {
                 </p>
             </div>
             <Landingpanel {...this.props} />
+            <RotateCarousel />
             </React.Fragment>
         )
     }

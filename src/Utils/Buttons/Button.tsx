@@ -5,7 +5,7 @@ interface Iprops {
     loading?: boolean;
     disabled?: boolean;
     className?: string;
-    children: string;
+    children: any;
     onClick?: () => void;
 }
 const Button = (props: Iprops) => {
