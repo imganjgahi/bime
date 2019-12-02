@@ -50,7 +50,7 @@ export default class Form extends React.Component<IProps, IState>{
         if (pervProps !== this.props) {
             this.setStateValues();
         }
-        if (!pervProps.reset && this.props.reset) {
+        if (pervProps.reset !== this.props.reset) {
             this.setState({ data: {} })
         }
     }
