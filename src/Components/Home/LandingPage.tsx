@@ -14,7 +14,7 @@ interface IState {
 
 class LandingPage extends React.Component<IProps, IState> {
 
-    constructor(props: any) {
+    constructor(props: IProps) {
         super(props);
         this.state = {
             status: false

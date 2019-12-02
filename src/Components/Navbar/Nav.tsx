@@ -1,10 +1,14 @@
 import React from 'react'
+import { IAuthState } from '../../actions/Auth/model';
 import { AuthActions } from '../../actions/Auth/action';
 import { IApplicationState } from '../../store/state';
 import { connect } from 'react-redux';
 import Login from '../Auth/Login';
 
-const NavBar = (props: any) => {
+
+type IProps = IAuthState & typeof AuthActions;
+
+const NavBar = (props: IProps) => {
 
     return (
         <div className="navbar">
