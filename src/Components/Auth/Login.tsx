@@ -27,13 +27,11 @@ class Login extends Component<IProps, IState> {
     render() {
         return (
             <Modal 
-            onOk={() => {
-                console.log("onOk")
-            }}
+            modalForm={true}
             visiblity={this.props.login.open} 
             title="ثبت نام"
              onCancel={this.onCancelHandler} >
-                <Form onSubmit={(values: any, err: any) => {
+                <Form id="x" onSubmit={(values: any, err: any) => {
                     if (err) {
                         console.log("err=>", values, err);
                         return;
@@ -43,9 +41,8 @@ class Login extends Component<IProps, IState> {
 
                 }}>
                     <FormItem 
-                    rules={[{ required: true, msg: "Name is require" }]} 
-                    // initialValue = "Mehran"
-                    label="User Name" name="Name" 
+                    rules={[{ required: true, msg: "Name is require" }]}
+                    label="نام: " name="Name" 
                     component={<input className="txtInput" type="text" />} />
                 </Form>
             </Modal>

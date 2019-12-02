@@ -8,6 +8,7 @@ interface IProps {
     onCancel: () => void
     visiblity: boolean
     children?: any
+    modalForm?: boolean
 }
 interface IState {
     isActive: boolean;
@@ -60,14 +61,16 @@ class Modal extends React.Component<IProps, IState> {
                     </div>
                     <div className="modalFooter">
 
-                        {this.props.onOk && (
+                        {(this.props.onOk || this.props.modalForm) && (
                             <Button onClick={() => {
                                 if (this.props.onOk) {
+                                    this.props.onOk()
+                                }
+                                if(this.props.modalForm){
                                     const btn = document.getElementById("formBtnSubmit")
                                     if (btn) {
                                         btn.click();
                                     }
-                                    this.props.onOk()
                                 }
                             }}>
                                 تایید
