@@ -12,7 +12,7 @@ type IState = {
     motorModal: boolean
 };
 
-class Landingpanel extends React.Component<IProps, IState> {
+class InsurancesPanel extends React.Component<IProps, IState> {
     constructor(props: IProps){
         super(props);
         this.state ={
@@ -56,4 +56,4 @@ class Landingpanel extends React.Component<IProps, IState> {
         );
     }
 }
-export default Landingpanel;
+export default InsurancesPanel;

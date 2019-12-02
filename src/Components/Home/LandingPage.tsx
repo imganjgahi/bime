@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { IHomeState } from '../../actions/Home/model'
 import { HomeActions } from '../../actions/Home/action'
 import { IApplicationState } from "../../store/state"
-import Landingpanel from './Landingpanel';
+import InsurancesPanel from './insurancesPanel';
 import RotateCarousel from '../Carousels/RotateCarousel';
-// import './LandingPage.scss'
 type IProps = IHomeState & typeof HomeActions;
 
 interface IState {
@@ -34,7 +33,7 @@ class LandingPage extends React.Component<IProps, IState> {
                     در صورت خرید تا ساعت 21 در روزهای عادی و تا ساعت 19 در روزهای پنج‌شنبه و تعطیل، بیمه‌نامه شما همان روز صادر می‌شود.
                 </p>
             </div>
-            <Landingpanel {...this.props} />
+            <InsurancesPanel {...this.props} />
             <RotateCarousel />
             </React.Fragment>
         )
