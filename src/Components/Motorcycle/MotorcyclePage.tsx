@@ -42,8 +42,8 @@ class MotorcyclePage extends Component<IProps, IState> {
                         this.setState({model: e.target.value})
                     }} className="txtInput" type="text" placeholder="مدل" />} />
 
-                    <FormItem name="year" component={<input disabled={this.state.model === ""} className="txtInput" type="text" placeholder="سال ساخت" />} />
-                    {this.state.showDate && <FormItem name="date" rules={[{required: true, msg: "must fill"}]} component={<input className="txtInput" type="text" placeholder="تاریخ " />} />}
+                    <FormItem name="year" rules={[{required: this.state.model !== "", msg: "must fill"}]} component={<input disabled={this.state.model === ""} className="txtInput" type="text" placeholder="سال ساخت" />} />
+                    { this.state.model !== "" && <FormItem name="date" rules={[{required: true, msg: "must fill"}]} component={<input className="txtInput" type="text" placeholder="تاریخ " />} />}
 
                     <Button type="submit">ـایید</Button>
                     <Button onClick={() => this.setState({showDate: !this.state.showDate})}>تاریخ</Button>

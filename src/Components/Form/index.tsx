@@ -68,13 +68,15 @@ export default class Form extends React.Component<IProps, IState>{
     }
 
     setStateValues = () => {
-        let data: any = this.state.data ? this.state.data : {}
+        let data: any = {}
         let err: any = {}
         let rules: any = {}
 
         React.Children.map(this.props.children, (child: any, index) => {
             if (child && child.type === FormItem) {
                 // data[child.props.name] = this.state.data && this.state.data[child.props.name] ? this.state.data[child.props.name] : child.props.initialValue ? child.props.initialValue : ""
+                
+                //initial state.data
                 if(this.state.data && this.state.data[child.props.name]){
                     data[child.props.name] =  this.state.data[child.props.name]
                 } else if (child.props.initialValue){
@@ -82,7 +84,15 @@ export default class Form extends React.Component<IProps, IState>{
                 } else {
                     data[child.props.name] = ""
                 }
-                err[child.props.name] = { msg: "", isValid: false }
+
+
+                //initial state.err
+                if(this.state.err && this.state.err[child.props.name]){
+                    err[child.props.name] =  this.state.err[child.props.name]
+                }else { 
+                    err[child.props.name] = { msg: "", isValid: false }
+                }
+
                 if (child.props.rules) {
                     rules[child.props.name] = child.props.rules
                 }
@@ -165,7 +175,6 @@ export default class Form extends React.Component<IProps, IState>{
 }
 
 const FromItemWrapper = (props: any) => {
-    console.log("data: ", props.data)
     return (
         <div className="itemWrapper">
             {props.label && <label className="fildesLabel" htmlFor={props.id}>{props.label}</label>}
