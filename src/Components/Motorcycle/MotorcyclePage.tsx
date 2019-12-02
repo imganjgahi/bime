@@ -42,6 +42,7 @@ class MotorcyclePage extends Component<IProps, IState> {
             <div>
                 <h1> خدمات بیمه موتور سیکلت</h1>
                 <Form 
+                reset= {this.state.showDate}
                 onSubmit={
                     (values: object, err: object | null) => {
                         this.onSubmitHandler(values, err)
@@ -51,8 +52,8 @@ class MotorcyclePage extends Component<IProps, IState> {
                     }} className="txtInput" type="text" placeholder="مدل" />} />
 
                     <FormItem name="year" rules={[{required: this.state.model !== "", msg: "must fill"}]} component={<input disabled={this.state.model === ""} className="txtInput" type="text" placeholder="سال ساخت" />} />
+                    <FormItem label="Color" initialValue="1" name="color" component={<MultiSelect optionList={fakeData} />} />
                     { this.state.model !== "" && <FormItem name="date" rules={[{required: true, msg: "must fill"}]} component={<input className="txtInput" type="text" placeholder="تاریخ " />} />}
-                    <FormItem label="City" name="city" component={<MultiSelect optionList={fakeData} />} />
                     <Button type="submit">ـایید</Button>
                     <Button onClick={() => this.setState({showDate: !this.state.showDate})}>تاریخ</Button>
                 </Form>

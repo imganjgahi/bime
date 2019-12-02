@@ -8,6 +8,7 @@ export interface IProps {
     valueProp?: string;
     initialValue?: string;
     authorization?: string;
+    value?: string;
 }
 
 export interface IState {
@@ -54,10 +55,12 @@ class MultiSelect extends React.Component<IProps, IState> {
         })
             .then(response => response.json())
             .then(json => this.setState({ optionList: json }, () => {
-                this.setInitialValue();
+                if (this.props.initialValue) {
+                    this.setInitialValue(this.props.initialValue);
+                }
             }))
     }
-    
+
     hideOption = () => {
         this.setState({ showOption: false, searchValue: "", activeItem: -1 });
     }
@@ -67,32 +70,44 @@ class MultiSelect extends React.Component<IProps, IState> {
             this.hideOption()
         }
     }
-    setInitialValue() {
-        const valueProp = this.props.valueProp ? this.props.valueProp : "id"; 
+    componentDidUpdate(prevProps: IProps) {
+        if (this.props.value !== prevProps.value) {
+            if(this.props.value){
+                this.setInitialValue(this.props.value)
+            } else {
+                this.setState({ value: [], displayValue: [] })
+            }
+        } 
+    }
+    setInitialValue(initialValue: string) {
+        const valueProp = this.props.valueProp ? this.props.valueProp : "id";
         const items: any[] = [];
         let displayValue: any[] = [];
-        if (this.props.initialValue !== undefined) {
-            this.props.initialValue.toString().split(",").forEach((item: any) => {
-                if(this.state.optionList.length > 0){
-                    const valueItem = this.state.optionList.filter(
-                        x => this.props.initialValue && x[valueProp].toString() ===
+        // if (this.props.initialValue !== undefined) {
+        initialValue.toString().split(",").forEach((item: any) => {
+            if (this.state.optionList.length > 0) {
+                const valueItem = this.state.optionList.filter(
+                    x => initialValue && x[valueProp].toString() ===
                         item.toString())
-                        if(valueItem && valueItem.length > 0){
-                            items.push(valueItem[0][valueProp])
-                            displayValue.push(valueItem[0]);
-                        }
+                if (valueItem && valueItem.length > 0) {
+                    items.push(valueItem[0][valueProp])
+                    displayValue.push(valueItem[0]);
                 }
-            });
-            this.setState({ value: items, displayValue })
+            }
+        });
+        console.log("displayValue: ", items, displayValue)
+        this.setState({ value: items, displayValue })
 
-        }
+        // }
     }
     componentDidMount() {
         if (this.props.url) {
             this.getOptions(this.props.url)
         } else if (this.props.optionList) {
             this.setState({ optionList: this.props.optionList }, () => {
-                this.setInitialValue();
+                if (this.props.initialValue) {
+                    this.setInitialValue(this.props.initialValue);
+                }
             })
         }
         document.addEventListener("mousedown", this.handleClickOutside);
@@ -111,16 +126,20 @@ class MultiSelect extends React.Component<IProps, IState> {
                 const valueProp = this.props.valueProp ? this.props.valueProp : "id";
                 const matchData = this.state.searchValue.toLocaleLowerCase().trim()
                 const datas = this.props.optionList.filter(data => data[displayProp].toLocaleLowerCase().trim().match(matchData));
-                const id = datas[this.state.activeItem][valueProp].toString();
-                const targetData = datas.filter(data => data[valueProp].toString() === id)[0]
-                this.onSelectHandler(targetData)
+                if (datas && datas[this.state.activeItem]) {
+                    const id = datas[this.state.activeItem][valueProp].toString();
+                    const targetData = datas.filter(data => data[valueProp].toString() === id)[0]
+                    this.onSelectHandler(targetData)
+                }
             }
         }
     }
     moveFocus() {
+        const displayProp = this.props.displayProp ? this.props.displayProp : "title";
         const node = this.ref.current;
-        const items: any[] = this.props.optionList ? this.props.optionList : []
         node.addEventListener('keydown', (e: any) => {
+            const matchData = this.state.searchValue.toLocaleLowerCase().trim()
+            const items: any[] = this.props.optionList ? this.props.optionList.filter(data => data[displayProp].toLocaleLowerCase().trim().match(matchData)) : [];
             let activeIndex = this.state.activeItem
             if (e.keyCode === 40 && activeIndex < (items.length - 1)) {
                 activeIndex++
@@ -128,7 +147,6 @@ class MultiSelect extends React.Component<IProps, IState> {
             if (e.keyCode === 38 && activeIndex > 0) {
                 activeIndex--
             }
-
             this.setState({ activeItem: activeIndex })
         });
     }
@@ -150,7 +168,7 @@ class MultiSelect extends React.Component<IProps, IState> {
         }
         this.ref.current && this.ref.current.focus()
         this.setState({ value: values, displayValue: displayList }, () => {
-            if(this.props.onChange){
+            if (this.props.onChange) {
                 this.props.onChange(this.state.value.join(","))
             }
         })
@@ -167,11 +185,14 @@ class MultiSelect extends React.Component<IProps, IState> {
         const selectedList = this.state.displayValue;
         const newSelectedList = selectedList.filter(selected => selected[valueProp].toString() !== item[valueProp].toString())
         const newValues = this.state.value.filter(selected => selected !== item[valueProp].toString())
-        this.setState({value: newValues, displayValue: newSelectedList }, () => {
-            if(this.props.onChange){
+        this.setState({ value: newValues, displayValue: newSelectedList }, () => {
+            if (this.props.onChange) {
                 this.props.onChange(this.state.value.join(","))
             }
         })
+    }
+    focusHandler = () => {
+        this.setState({ showOption: true })
     }
     render() {
         const displayProp = this.props.displayProp ? this.props.displayProp : "title";
@@ -199,13 +220,14 @@ class MultiSelect extends React.Component<IProps, IState> {
                             display: this.state.showInput ? "block" : "none",
                             width: this.state.searchValue.length === 0 ? "19px" : (this.state.searchValue.length * 9) + "px"
                         }}
+                        onFocus={this.focusHandler}
                         onKeyDown={this._handleKeyDown}
                         ref={this.ref} type="text" className="multiSearchInput"
                         onChange={this.onChangeHandler}
                         value={this.state.searchValue} />
                 </div>
                 <div className={this.state.showOption ? "multiDataList" : "multiDataList optionHide"} ref={this.optionContainer} tabIndex={-1}>
-                    {datas.map((data, i) => {
+                    {datas.length > 0 ? datas.map((data, i) => {
                         const isSelected = this.state.displayValue.some(selectedItem => selectedItem[valueProp].toString() === data[valueProp].toString())
                         return (
                             <div key={i} id={data[valueProp].toString()}
@@ -218,7 +240,11 @@ class MultiSelect extends React.Component<IProps, IState> {
                                 {data[displayProp]}
                             </div>
                         )
-                    })}
+                    }) : (
+                            <div style={{ textAlign: "center", padding: "10px" }}>
+                                <small> اطلاعاتی موجود نیست </small>
+                            </div>
+                        )}
                 </div>
             </div>
         );
