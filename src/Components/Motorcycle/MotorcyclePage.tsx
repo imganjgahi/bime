@@ -40,7 +40,7 @@ class MotorcyclePage extends Component<IProps, IState> {
     }
     render() {
         return (
-            <div>
+            <div className="motorcyclePage">
                 <h1> خدمات بیمه موتور سیکلت</h1>
                 <Form 
                 reset= {this.state.showDate}
