@@ -87,11 +87,11 @@ export default class Form extends React.Component<IProps, IState>{
 
 
                 //initial state.err
-                if(this.state.err && this.state.err[child.props.name]){
-                    err[child.props.name] =  this.state.err[child.props.name]
-                }else { 
+                // if(this.state.err && this.state.err[child.props.name]){
+                //     err[child.props.name] =  this.state.err[child.props.name]
+                // }else { 
                     err[child.props.name] = { msg: "", isValid: false }
-                }
+                // }
 
                 if (child.props.rules) {
                     rules[child.props.name] = child.props.rules

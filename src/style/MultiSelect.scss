@@ -1,0 +1,71 @@
+.multiContainer {
+    background-color: white;
+    position: relative;
+}
+.multiDisplayContainer {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #888;
+    padding: 2px;
+    border-radius: 5px;
+}
+.multiDisplayItem {
+    background-color: #09f;
+    color: white;
+    padding: 3px 5px;
+    margin: 0px 5px;
+    border-radius: 3px;
+    min-width: 50px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.multiSearchInput {
+    border: none;
+    width: 19px;
+}
+
+.multiDataList {
+    border: 1px solid #09f;
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    max-height: 210px;
+    overflow-y: auto;
+    transition: all 200ms;
+    background-color: white;
+    z-index: 25;
+    padding: 0 5px;
+}
+.multiSelectOption {
+    height: 30px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.multiOptionActive,
+.multiSelectOption:focus,
+.multiSelectOption:hover {
+    background-color: #0666a6;
+    color: white;
+}
+.multiSelectedItem {
+    background-color: #09f;
+    color: white;
+}
+.optionHide {
+    max-height: 0px;
+    top: 90%;
+    z-index: -1;
+}
+
+.multiUnselect {
+    width: 10px;
+    cursor: pointer;
+    border-right: 1px solid;
+    padding-right: 3px;
+    margin-right: 5px;
+    font-weight: bold;
+}
