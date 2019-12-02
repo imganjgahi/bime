@@ -7,6 +7,7 @@ interface IProps {
 }
 interface IState {
     [key: string]: any;
+    iscreated: boolean;
 }
 
 export default class Form extends React.Component<IProps, IState>{
@@ -14,6 +15,7 @@ export default class Form extends React.Component<IProps, IState>{
         super(props);
         this.state = {
 
+            iscreated: false
         };
     }
 
@@ -51,7 +53,9 @@ export default class Form extends React.Component<IProps, IState>{
             this.setStateValues();
         }
         if (pervProps.reset !== this.props.reset) {
-            this.setState({ data: {} })
+            this.setState({ data: {} }, () => {    
+                this.setStateValues(true);
+            })
         }
     }
 
@@ -67,7 +71,7 @@ export default class Form extends React.Component<IProps, IState>{
         }
     }
 
-    setStateValues = () => {
+    setStateValues = (isReset = false) => {
         let data: any = {}
         let err: any = {}
         let rules: any = {}
@@ -75,11 +79,15 @@ export default class Form extends React.Component<IProps, IState>{
         React.Children.map(this.props.children, (child: any, index) => {
             if (child && child.type === FormItem) {
                 // data[child.props.name] = this.state.data && this.state.data[child.props.name] ? this.state.data[child.props.name] : child.props.initialValue ? child.props.initialValue : ""
-                
-                //initial state.data
-                if(this.state.data && this.state.data[child.props.name]){
+                if (child.props.rules) {
+                    rules[child.props.name] = child.props.rules
+                }
+
+                if(isReset){
+                    data[child.props.name] = ""
+                } else if(this.state.data && this.state.data[child.props.name]){
                     data[child.props.name] =  this.state.data[child.props.name]
-                } else if (child.props.initialValue){
+                } else if (child.props.initialValue && !this.state.iscreated){
                     data[child.props.name] = child.props.initialValue
                 } else {
                     data[child.props.name] = ""
@@ -93,15 +101,14 @@ export default class Form extends React.Component<IProps, IState>{
                     err[child.props.name] = { msg: "", isValid: false }
                 // }
 
-                if (child.props.rules) {
-                    rules[child.props.name] = child.props.rules
-                }
+                
             }
         });
         this.setState({
             data,
             err,
-            rules
+            rules,
+            iscreated: true
         })
     }
     getChild = () => {

@@ -6,6 +6,7 @@ import { MotorCycleActions } from '../../actions/Motorcycle/action';
 import Form, { FormItem } from '../Form';
 import Button from '../../Utils/Buttons/Button';
 import MultiSelect from '../Form/MultiSelect';
+import DatePicker from '../NiliPicker/Calendar';
 
 type IProps = IMotorcycleState & typeof MotorCycleActions
 
@@ -15,7 +16,7 @@ type IState = {
 };
 const fakeData = [
     { id: "1", title: "Red" },
-    { id: "2", title: "Green" },
+    { id: "2", title: "قرمز 2" },
     { id: "3", title: "Blue" },
     { id: "4", title: "Yellow" },
     { id: "5", title: "Purple" },
@@ -54,6 +55,8 @@ class MotorcyclePage extends Component<IProps, IState> {
                     <FormItem name="year" rules={[{required: this.state.model !== "", msg: "must fill"}]} component={<input disabled={this.state.model === ""} className="txtInput" type="text" placeholder="سال ساخت" />} />
                     <FormItem label="Color" initialValue="1" name="color" component={<MultiSelect optionList={fakeData} />} />
                     { this.state.model !== "" && <FormItem name="date" rules={[{required: true, msg: "must fill"}]} component={<input className="txtInput" type="text" placeholder="تاریخ " />} />}
+                    
+                    <FormItem name="jalali" component={<DatePicker setTime={true} />} />
                     <Button type="submit">ـایید</Button>
                     <Button onClick={() => this.setState({showDate: !this.state.showDate})}>تاریخ</Button>
                 </Form>
