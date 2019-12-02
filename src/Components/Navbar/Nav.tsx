@@ -4,6 +4,7 @@ import { AuthActions } from '../../actions/Auth/action';
 import { IApplicationState } from '../../store/state';
 import { connect } from 'react-redux';
 import Login from '../Auth/Login';
+import { Link } from 'react-router-dom';
 
 
 type IProps = IAuthState & typeof AuthActions;
@@ -14,7 +15,7 @@ const NavBar = (props: IProps) => {
         <div className="navbar">
             <Login {...props} />
             <div className="logo">
-                لوگو
+                <Link to="/"> لوگو </Link>
             </div>
                 <ul className="navMenu">
                     <li className="navLink">منو</li>

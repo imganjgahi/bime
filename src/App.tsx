@@ -6,20 +6,22 @@ import {
 } from "react-router-dom";
 import NavBar from './Components/Navbar/Nav';
 import LandingPage from './Components/Home/LandingPage';
+import MotorcyclePage from './Components/Motorcycle/MotorcyclePage';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <NavBar />
-      <div className="container">
+      <Router>
+        <NavBar />
+        <div className="container">
 
-    <Router>
-    <Switch>
+          <Switch>
 
-      <Route path = "/" component = {LandingPage} />
-    </Switch>
-    </Router>
-    </div>
+            <Route path="/motorcycle" component={MotorcyclePage} />
+            <Route path="/" component={LandingPage} />
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }

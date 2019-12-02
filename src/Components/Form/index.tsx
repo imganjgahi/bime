@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../../Utils/Buttons/Button';
 interface IProps {
     onSubmit: (values: any, err: any) => void;
     reset?: boolean;
@@ -7,6 +8,7 @@ interface IProps {
 interface IState {
     [key: string]: any;
 }
+
 export default class Form extends React.Component<IProps, IState>{
     constructor(props: IProps) {
         super(props);
@@ -66,13 +68,20 @@ export default class Form extends React.Component<IProps, IState>{
     }
 
     setStateValues = () => {
-        let data: any = {}
+        let data: any = this.state.data ? this.state.data : {}
         let err: any = {}
         let rules: any = {}
 
         React.Children.map(this.props.children, (child: any, index) => {
             if (child && child.type === FormItem) {
-                data[child.props.name] = child.props.initialValue ? child.props.initialValue : ""
+                // data[child.props.name] = this.state.data && this.state.data[child.props.name] ? this.state.data[child.props.name] : child.props.initialValue ? child.props.initialValue : ""
+                if(this.state.data && this.state.data[child.props.name]){
+                    data[child.props.name] =  this.state.data[child.props.name]
+                } else if (child.props.initialValue){
+                    data[child.props.name] = child.props.initialValue
+                } else {
+                    data[child.props.name] = ""
+                }
                 err[child.props.name] = { msg: "", isValid: false }
                 if (child.props.rules) {
                     rules[child.props.name] = child.props.rules
@@ -107,13 +116,14 @@ export default class Form extends React.Component<IProps, IState>{
                 }
                 const El = React.cloneElement(comp, initialElement, null);
                 return <FromItemWrapper
+                    data = {this.state.data}
                     label={child.props.label}
                     id={comp.props.id ? comp.props.id : child.props.name}
                     name={child.props.name}
                     itemElement={El}
                     err={this.state.err && this.state.err[child.props.name] ? this.state.err[child.props.name].msg : null} />
             }
-            else if (child && child.type === "button") {
+            else if (child && child.type === Button) {
                 return child
             }
         });
@@ -155,6 +165,7 @@ export default class Form extends React.Component<IProps, IState>{
 }
 
 const FromItemWrapper = (props: any) => {
+    console.log("data: ", props.data)
     return (
         <div className="itemWrapper">
             {props.label && <label className="fildesLabel" htmlFor={props.id}>{props.label}</label>}
