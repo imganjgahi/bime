@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 // import Button from '../../Utils/Buttons/Button';
 import { FormState, FormContext } from './FormContext';
 interface IProps {
@@ -196,7 +196,11 @@ const FromItemWrapper = (props: any) => {
 
 export const FormItem = (props:any) =>{
     
+    const {state, dispatch} = useContext(FormContext)
 
+    useEffect(() => {
+      return      console.log(state)
+    },[])
    return props.component
 
  }
